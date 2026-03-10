@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "zacoxlo",
+	"version": "${version}",
+	"name": "Zacoxlo",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/zacoxlo/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "me.qigan.zacoxlo.ZacoxloGm"
+		],
+		"client": [
+          "me.qigan.zacoxlo.Zacoxlo"
+		]
+	},
+	"mixins": [
+		"zacoxlo.mixins.json",
+		{
+			"config": "zacoxlo.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.21.10",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
