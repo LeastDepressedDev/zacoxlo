@@ -1,22 +1,18 @@
 package me.qigan.zacoxlo.fr;
 
 import me.qigan.zacoxlo.cfg.Module;
+import me.qigan.zacoxlo.util.Sync;
 import me.qigan.zacoxlo.util.UnsortedUtils;
 import me.qigan.zacoxlo.util.render.Drawer;
 import me.qigan.zacoxlo.util.render.RSect;
 import me.qigan.zacoxlo.util.render.RenderHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import org.joml.Vector3f;
 
-import java.util.List;
-
 public class StarredMobs extends Module {
-
-    private String starredRegex = "^.*✯ .*\\d{1,3}(?:,\\d{3})*(?:\\.\\d+)?(?:[kM])?❤$";
 
     @Override
     public String id() {
@@ -32,16 +28,9 @@ public class StarredMobs extends Module {
     public void onRegister() {
         WorldRenderEvents.END_MAIN.register((ctx) -> {
             if (!isEnabled()) return;
-            if (Minecraft.getInstance().level == null) return;
+            if (Minecraft.getInstance().level == null || !Sync.inDungeon) return;
             Drawer drawer = new Drawer(RSect.rtypesf.ESP_LINE).withContext(ctx).begin();
             drawer.globalize().line(3f).capture();
-
-//            Minecraft.getInstance().level.entitiesForRendering().forEach((ent) -> {
-//                if (!ent.isAlive() || ent.distanceTo(Minecraft.getInstance().player) > 50) return;
-//                if (isStarred(ent)) {
-//                    RenderHelper.autoBox3D(drawer, ent, 0xFF00FFFF);
-//                }
-//            });
 
             Minecraft.getInstance().level.getEntitiesOfClass(ArmorStand.class, UnsortedUtils.getRadiusAABB(50)).forEach((ent) -> {
                 if (ent.getName().getString().contains("✯") && ent.getName().getString().contains("❤")) {
@@ -56,12 +45,6 @@ public class StarredMobs extends Module {
 
             drawer.end();
         });
-    }
-
-
-    public static boolean isStarred(Entity entity) {
-        List<ArmorStand> armorStands = UnsortedUtils.getArmorStands(entity);
-        return !armorStands.isEmpty() && armorStands.getFirst().getName().getString().contains("✯");
     }
 
 }

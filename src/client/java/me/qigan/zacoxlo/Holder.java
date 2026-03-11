@@ -1,6 +1,8 @@
 package me.qigan.zacoxlo;
 
 import me.qigan.zacoxlo.cfg.Module;
+import me.qigan.zacoxlo.fr.AutoBoostPlacement;
+import me.qigan.zacoxlo.fr.AutoLevers;
 import me.qigan.zacoxlo.fr.StarredMobs;
 
 import java.util.ArrayList;
@@ -14,6 +16,8 @@ public class Holder {
 
     public static void init() {
         register(new StarredMobs());
+        register(new AutoLevers());
+        register(new AutoBoostPlacement());
     }
 
     public static void register(Module module) {

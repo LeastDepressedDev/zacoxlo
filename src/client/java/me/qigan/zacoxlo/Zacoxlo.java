@@ -1,8 +1,13 @@
 package me.qigan.zacoxlo;
 
+import me.qigan.zacoxlo.backbone.ClickSimTick;
 import me.qigan.zacoxlo.cfg.ConfigManager;
 import me.qigan.zacoxlo.cfg.MuConfig;
+import me.qigan.zacoxlo.util.Sync;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.File;
@@ -21,5 +26,15 @@ public class Zacoxlo implements ClientModInitializer {
 
         Zacoxlo.MAIN_CFG = new MuConfig();
         Zacoxlo.CFG_MANAGER = new ConfigManager("abse/configs");
+
+        ClientTickEvents.END_CLIENT_TICK.register(ClickSimTick::tick);
+        ClientTickEvents.END_CLIENT_TICK.register(Sync::clientTick);
+
+        ClientCommandRegistrationCallback.EVENT.register((
+                (commandDispatcher,
+                 commandBuildContext) -> {
+                    Commands.registerMain(commandDispatcher, commandBuildContext);
+                    return;
+                }));
 	}
 }
