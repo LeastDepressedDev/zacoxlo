@@ -4,6 +4,7 @@ import me.qigan.zacoxlo.cfg.Module;
 import me.qigan.zacoxlo.fr.AutoBoostPlacement;
 import me.qigan.zacoxlo.fr.AutoLevers;
 import me.qigan.zacoxlo.fr.StarredMobs;
+import me.qigan.zacoxlo.fr.Trail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ public class Holder {
         register(new StarredMobs());
         register(new AutoLevers());
         register(new AutoBoostPlacement());
+        register(new Trail());
     }
 
     public static void register(Module module) {
