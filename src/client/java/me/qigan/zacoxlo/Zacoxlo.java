@@ -19,13 +19,13 @@ public class Zacoxlo implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-        File file = new File(FabricLoader.getInstance().getConfigDir() + "/abse/configs");
+        File file = new File(FabricLoader.getInstance().getConfigDir() + "/zacoxlo/configs");
         if (!file.exists()) file.mkdirs();
 
         Holder.init();
 
         Zacoxlo.MAIN_CFG = new MuConfig();
-        Zacoxlo.CFG_MANAGER = new ConfigManager("abse/configs");
+        Zacoxlo.CFG_MANAGER = new ConfigManager("zacoxlo/configs");
 
         ClientTickEvents.END_CLIENT_TICK.register(ClickSimTick::tick);
         ClientTickEvents.END_CLIENT_TICK.register(Sync::clientTick);
