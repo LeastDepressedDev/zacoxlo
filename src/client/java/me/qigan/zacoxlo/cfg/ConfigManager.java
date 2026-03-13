@@ -44,7 +44,7 @@ public class ConfigManager {
 
     public void loadFrom(String name) {
         File file = new File(innerPath + "/" + name + ".cfg");
-        fromFileToFile(file, new File(FabricLoader.getInstance().getConfigDir() + "/abse.cfg"));
+        fromFileToFile(file, new File(FabricLoader.getInstance().getConfigDir() + "/zacoxlo.cfg"));
         reloadMain();
     }
 

@@ -15,7 +15,7 @@ public class MuConfig {
     public MuConfig() {
 
         //init writer class
-        this.writer = new AddressedWriter(FabricLoader.getInstance().getConfigDir() + "/abse.cfg");
+        this.writer = new AddressedWriter(FabricLoader.getInstance().getConfigDir() + "/zacoxlo.cfg");
 
         //clr_mem
         sets.clear();

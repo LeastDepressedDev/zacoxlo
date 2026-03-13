@@ -42,7 +42,7 @@ public class Trail extends Module {
         ClientTickEvents.END_CLIENT_TICK.register((mc) -> {
             if (!isEnabled() || mc.player == null) return;
             Vector3f pos = mc.player.position().toVector3f();
-            Color color = Color.getHSBColor(c_angle, 1f, 1f);
+            Color color = Color.getHSBColor(c_angle, 0.75f, 0.8f);
             pos_l.add(new AddressedData<>(pos, color));
             if (pos_l.size() > Zacoxlo.MAIN_CFG.getIntVal("dtrail_ticks")) pos_l.removeFirst();
 
@@ -51,7 +51,7 @@ public class Trail extends Module {
         WorldRenderEvents.END_MAIN.register((ctx) -> {
             if (!isEnabled() || pos_l.isEmpty() || Minecraft.getInstance().level == null) return;
             Drawer drawer = new Drawer(RSect.rtypesf.DEF_LINE).withContext(ctx).begin();
-            drawer.globalize().line(3f).capture();
+            drawer.globalize().line(10f).capture();
 
             AtomicReference<AddressedData<Vector3f, Color>> pr = new AtomicReference<>(pos_l.getFirst());
             pos_l.forEach((inpr) -> {
