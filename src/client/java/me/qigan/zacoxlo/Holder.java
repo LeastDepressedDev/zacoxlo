@@ -1,6 +1,7 @@
 package me.qigan.zacoxlo;
 
 import me.qigan.zacoxlo.cfg.Module;
+import me.qigan.zacoxlo.crp.Experimental;
 import me.qigan.zacoxlo.fr.AutoBoostPlacement;
 import me.qigan.zacoxlo.fr.AutoLevers;
 import me.qigan.zacoxlo.fr.StarredMobs;
@@ -20,6 +21,8 @@ public class Holder {
         register(new AutoLevers());
         register(new AutoBoostPlacement());
         register(new Trail());
+
+        register(new Experimental());
     }
 
     public static void register(Module module) {

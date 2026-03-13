@@ -1,6 +1,7 @@
 package me.qigan.zacoxlo;
 
 import me.qigan.zacoxlo.backbone.ClickSimTick;
+import me.qigan.zacoxlo.backbone.ClientTickTimes;
 import me.qigan.zacoxlo.cfg.ConfigManager;
 import me.qigan.zacoxlo.cfg.MuConfig;
 import me.qigan.zacoxlo.util.Sync;
@@ -29,6 +30,7 @@ public class Zacoxlo implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(ClickSimTick::tick);
         ClientTickEvents.END_CLIENT_TICK.register(Sync::clientTick);
+        ClientTickEvents.END_CLIENT_TICK.register(ClientTickTimes::clientStaticTick);
 
         ClientCommandRegistrationCallback.EVENT.register((
                 (commandDispatcher,
