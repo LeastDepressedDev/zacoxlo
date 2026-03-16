@@ -12,12 +12,11 @@ public class Drawer {
 
     private final RenderType rtl;
     public PoseStack stack = null;
-    public final VertexConsumer buf;
+    public VertexConsumer buf;
     private PoseStack.Pose lpose;
 
     public Drawer(RenderType renderType) {
         this.rtl = renderType;
-        this.buf = Dconsts.getVCP().getBuffer(rtl);
     }
 
     public Drawer withContext(WorldRenderContext context) {
@@ -107,13 +106,13 @@ public class Drawer {
 
     public Drawer begin() {
         if (this.stack == null) throw new DrawerBeginException("PoseStack is not initialised. Probably no context given.");
+        this.buf = Dconsts.getVCP().getBuffer(rtl);
         this.stack.pushPose();
         return this;
     }
 
     public void end() {
         this.stack.popPose();
-        Dconsts.getVCP().endBatch(rtl);
     }
 
     public RenderType getType() {

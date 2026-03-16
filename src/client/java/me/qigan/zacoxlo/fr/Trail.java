@@ -51,7 +51,7 @@ public class Trail extends Module {
         WorldRenderEvents.END_MAIN.register((ctx) -> {
             if (!isEnabled() || pos_l.isEmpty() || Minecraft.getInstance().level == null) return;
             Drawer drawer = new Drawer(RSect.rtypesf.DEF_LINE).withContext(ctx).begin();
-            drawer.globalize().line(10f).capture();
+            drawer.globalize().line(3f).capture(); //TODO: Resolve line width sub finishing case
 
             AtomicReference<AddressedData<Vector3f, Color>> pr = new AtomicReference<>(pos_l.getFirst());
             pos_l.forEach((inpr) -> {
