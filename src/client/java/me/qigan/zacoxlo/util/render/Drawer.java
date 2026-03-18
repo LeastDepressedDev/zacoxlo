@@ -78,11 +78,6 @@ public class Drawer {
 
 
 
-    public final Drawer line(float width) {
-        RenderSystem.lineWidth(width);
-        return this;
-    }
-
     public final Drawer globalize() {
         Camera cam = Dconsts.getCamera();
         this.stack.translate(cam.position().multiply(-1f, -1f, -1f));

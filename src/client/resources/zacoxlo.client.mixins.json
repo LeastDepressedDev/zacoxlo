@@ -3,7 +3,7 @@
 	"package": "me.qigan.zacoxlo.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"ExampleClientMixin"
+      "MinecraftInst"
 	],
 	"injectors": {
 		"defaultRequire": 1

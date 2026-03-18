@@ -1,5 +1,6 @@
 package me.qigan.zacoxlo.mixin.client;
 
+import me.qigan.zacoxlo.backbone.FirstRoutine;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -7,9 +8,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
-public class ExampleClientMixin {
-	@Inject(at = @At("HEAD"), method = "run")
-	private void init(CallbackInfo info) {
-		// This code is injected into the start of Minecraft.run()V
+public class MinecraftInst {
+	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;handleDelayedCrash()V"), method = "run")
+	private void fRunTick(CallbackInfo info) {
+        FirstRoutine.procRoutines();
 	}
 }

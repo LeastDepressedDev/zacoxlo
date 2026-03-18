@@ -2,10 +2,7 @@ package me.qigan.zacoxlo;
 
 import me.qigan.zacoxlo.cfg.Module;
 import me.qigan.zacoxlo.crp.Experimental;
-import me.qigan.zacoxlo.fr.AutoBoostPlacement;
-import me.qigan.zacoxlo.fr.AutoLevers;
-import me.qigan.zacoxlo.fr.StarredMobs;
-import me.qigan.zacoxlo.fr.Trail;
+import me.qigan.zacoxlo.fr.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +18,7 @@ public class Holder {
         register(new AutoLevers());
         register(new AutoBoostPlacement());
         register(new Trail());
+        register(new SSModulo());
 
         register(new Experimental());
     }

@@ -4,10 +4,12 @@ import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.platform.DepthTestFunction;
 import me.qigan.zacoxlo.ZacoxloGm;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.HashSet;
+import java.util.OptionalDouble;
 import java.util.Set;
 
 public class RSect {
@@ -47,12 +49,27 @@ public class RSect {
 
         public static final Set<RenderType> collection = new HashSet<>();
 
-        public static final RenderType ESP_LINE = RenderType.create("%s:%s".formatted(ZacoxloGm.MOD_ID, names.ESP_LINE),
-                RenderType.BIG_BUFFER_SIZE, pipelines.ESP_LINE, RenderType.CompositeState.builder().createCompositeState(false)
+        public static final RenderType ESP_LINE = RenderType.create("%s:%s-3.5".formatted(ZacoxloGm.MOD_ID, names.ESP_LINE),
+                RenderType.BIG_BUFFER_SIZE, pipelines.ESP_LINE, RenderType.CompositeState.builder()
+                        .setLineState(new RenderStateShard.LineStateShard(OptionalDouble.of(3.5)))
+                        .createCompositeState(false)
         );
 
-        public static final RenderType DEF_LINE = RenderType.create("%s:%s".formatted(ZacoxloGm.MOD_ID, names.DEF_LINES),
-                RenderType.BIG_BUFFER_SIZE, pipelines.DEF_LINE, RenderType.CompositeState.builder().createCompositeState(false));
+        public static final RenderType THICK_ESP_LINE = RenderType.create("%s:%s-6.5".formatted(ZacoxloGm.MOD_ID, names.ESP_LINE),
+                RenderType.BIG_BUFFER_SIZE, pipelines.ESP_LINE, RenderType.CompositeState.builder()
+                        .setLineState(new RenderStateShard.LineStateShard(OptionalDouble.of(6.5)))
+                        .createCompositeState(false)
+        );
+
+        public static final RenderType DEF_LINE = RenderType.create("%s:%s-3.5".formatted(ZacoxloGm.MOD_ID, names.DEF_LINES),
+                RenderType.BIG_BUFFER_SIZE, pipelines.DEF_LINE, RenderType.CompositeState.builder()
+                        .setLineState(new RenderStateShard.LineStateShard(OptionalDouble.of(3.5)))
+                        .createCompositeState(false));
+
+        public static final RenderType THICK_DEF_LINE = RenderType.create("%s:%s-6.5".formatted(ZacoxloGm.MOD_ID, names.DEF_LINES),
+                RenderType.BIG_BUFFER_SIZE, pipelines.DEF_LINE, RenderType.CompositeState.builder()
+                        .setLineState(new RenderStateShard.LineStateShard(OptionalDouble.of(6.5)))
+                        .createCompositeState(false));
     }
 
     public static void register() {
@@ -61,6 +78,8 @@ public class RSect {
 
         rtypesf.collection.add(rtypesf.ESP_LINE);
         rtypesf.collection.add(rtypesf.DEF_LINE);
+        rtypesf.collection.add(rtypesf.THICK_ESP_LINE);
+        rtypesf.collection.add(rtypesf.THICK_DEF_LINE);
 
         pipelines.collection.add(pipelines.ESP_LINE);
         pipelines.collection.add(pipelines.DEF_LINE);

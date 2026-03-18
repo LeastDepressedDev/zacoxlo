@@ -2,6 +2,7 @@ package me.qigan.zacoxlo.fr;
 
 import me.qigan.zacoxlo.Zacoxlo;
 import me.qigan.zacoxlo.backbone.ClickSimTick;
+import me.qigan.zacoxlo.backbone.FirstRoutine;
 import me.qigan.zacoxlo.cfg.Module;
 import me.qigan.zacoxlo.crp.SetsData;
 import me.qigan.zacoxlo.crp.ValType;
@@ -89,7 +90,7 @@ public class AutoLevers extends Module {
             if (del > 0) del--;
         }));
 
-        WorldRenderEvents.END_MAIN.register((ctx) -> {
+        FirstRoutine.addRoutine(() -> {
             if (!isEnabled() || Minecraft.getInstance().level == null ||
                     Minecraft.getInstance().player == null || !Sync.inDungeon) return;
             if (del != 0) return;
@@ -113,7 +114,7 @@ public class AutoLevers extends Module {
         WorldRenderEvents.END_MAIN.register((ctx) -> {
             if (!isEnabled() || Minecraft.getInstance().level == null || !Sync.inDungeon) return;
             Drawer drawer = new Drawer(RSect.rtypesf.DEF_LINE).withContext(ctx).begin();
-            drawer.globalize().line(4.5f).capture();
+            drawer.globalize().capture();
             CONSTS.forEach((bp -> {
                 RenderHelper.autoBox3D(drawer, bp, tracks.contains(bp) ? 0xFF2200 : 0x00FF00, null);
             }));

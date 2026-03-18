@@ -31,7 +31,7 @@ public class StarredMobs extends Module {
             if (!isEnabled()) return;
             if (Minecraft.getInstance().level == null || !Sync.inDungeon) return;
             Drawer drawer = new Drawer(RSect.rtypesf.ESP_LINE).withContext(ctx).begin();
-            drawer.globalize().line(3f).capture();
+            drawer.globalize().capture();
 
             Minecraft.getInstance().level.getEntitiesOfClass(ArmorStand.class, UnsortedUtils.getRadiusAABB(50)).forEach((ent) -> {
                 if (ent.getName().getString().contains("✯") && ent.getName().getString().contains("❤")) {
