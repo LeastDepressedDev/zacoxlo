@@ -11,6 +11,5 @@ public abstract class InworldTextRenderer extends WorldTickSyncedTextRender {
     public final void drawTextComponent(CompactTextComponent component, Vec3 pos, int color) {
         Vector2f nPos = VectorizationUtils.vec3ddto2df(pos);
         if (nPos != null) texts.add(new Element((int) nPos.x, (int) nPos.y, component, color));
-        if (nPos != null) UnsortedUtils.sendQuickLog(nPos.toString());
     }
 }

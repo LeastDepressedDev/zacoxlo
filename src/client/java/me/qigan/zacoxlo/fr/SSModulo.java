@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.phys.Vec3;
 
 public class SSModulo extends Module {
@@ -17,7 +18,8 @@ public class SSModulo extends Module {
     InworldTextRenderer renderer = new InworldTextRenderer() {
         @Override
         public void update(WorldRenderContext ctx) {
-            drawTextComponent(CompactTextComponent.quick("Nigger"), new Vec3(0,0,0), 0xFFFFFFFF);
+            drawTextComponent(new CompactTextComponent(Component.literal("Nigga"), null, true),
+                    new Vec3(0,0,0), 0xFFFFFFFF);
             super.update(ctx);
         }
     };

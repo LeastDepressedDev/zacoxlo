@@ -31,9 +31,7 @@ public class VectorizationUtils {
         rotated.rotateY((float) -Math.toRadians(camera.getYRot()));
         rotated.rotateX((float) -Math.toRadians(camera.getXRot()));
 
-        float fovFactor = (float) (screenHeight / (2 * Math.tan(Math.toRadians(Minecraft.getInstance().options.fov().get()) / 2.0)));
-
-
+        float fovFactor = (float) (screenHeight / (2 * Math.tan(Math.toRadians(actualFov) / 2.0)));
 
         // Inner not in screen check
         return rotated.z <= 0 ? null : new Vector2f(
