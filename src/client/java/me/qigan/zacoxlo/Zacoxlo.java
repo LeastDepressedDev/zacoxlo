@@ -2,6 +2,7 @@ package me.qigan.zacoxlo;
 
 import me.qigan.zacoxlo.backbone.ClickSimTick;
 import me.qigan.zacoxlo.backbone.ClientTickTimes;
+import me.qigan.zacoxlo.backbone.Hud;
 import me.qigan.zacoxlo.cfg.ConfigManager;
 import me.qigan.zacoxlo.cfg.MuConfig;
 import me.qigan.zacoxlo.util.Sync;
@@ -42,6 +43,7 @@ public class Zacoxlo implements ClientModInitializer {
                     return;
                 }));
 
+        Hud.init();
         WorldRenderEvents.END_MAIN.register((ctx) -> {RSect.endBatches();});
 	}
 }

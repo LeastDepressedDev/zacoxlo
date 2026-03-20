@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
-public class MinecraftInst {
+public class MixinMinecraft {
 	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;handleDelayedCrash()V"), method = "run")
 	private void fRunTick(CallbackInfo info) {
         FirstRoutine.procRoutines();
