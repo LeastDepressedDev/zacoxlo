@@ -6,13 +6,14 @@ import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderContext;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import org.joml.Vector2f;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class WorldTickSyncedTextRender implements Hud.LegacyRoutine {
 
-    public record Element(int x, int y, CompactTextComponent component, int color) { }
+    public record Element(int x, int y, CompactTextComponent component, int color, Vector2f subscale) { }
 
     protected final List<Element> texts = new ArrayList<>();
     private List<Element> elements = new ArrayList<>();
@@ -20,10 +21,16 @@ public abstract class WorldTickSyncedTextRender implements Hud.LegacyRoutine {
     @Override
     public void drawTick(GuiGraphics ctx, DeltaTracker tick) {
         elements.forEach(txt -> {
+            ctx.pose().pushMatrix();
+            ctx.pose().translate(txt.x, txt.y);
+            ctx.pose().scale(txt.component.scale());
+            ctx.pose().scale(txt.subscale);
             if (txt.component.centered()) ctx.drawCenteredString(txt.component.font() == null ? Minecraft.getInstance().font : txt.component.font(),
-                    txt.component.component(), txt.x, txt.y, txt.color);
+                    txt.component.component(), 0, 0, txt.color);
             else ctx.drawString(txt.component.font() == null ? Minecraft.getInstance().font : txt.component.font(),
-                    txt.component.component(), txt.x, txt.y, txt.color);
+                    txt.component.component(), 0, 0, txt.color);
+
+            ctx.pose().popMatrix();
         });
     }
 

@@ -1,0 +1,64 @@
+{
+  "name": "optional", // Optonal
+  "author": "optional", // Optonal
+  "activate": {
+    "type": "key", // accept `key` or `mouse`
+    "key": 73 // Integer id of key: https://www.glfw.org/docs/3.3/group__keys.html
+  },
+  "require": [
+    {
+      "slot": 0, // Optonal
+      "sbid": "ENDER_PEARL" // Skyblock id
+    }
+  ],
+  "deltype": "tick", // This one is complicated.
+  // If deltype: tick -> it will run sequence with a step of client tick.
+  //  So del operator will be counted in ticks.
+  // If deltype: time -> it will run sequence as a FirstRoutine task
+  //  Del operator time will be counted in millis, despite task being closer to tick tasks.
+  // If deltype: thread -> it will create a separated thread for macro sequence
+  //  This one will have the most accurate delay, but will consume one thread
+  "seq": [
+    {
+      "type": "log",
+      "msg": "Example chat message to you"
+    },
+    {
+      "type": "chat",
+      "msg": "Ponozzzzzz"
+    },
+    {
+      "type": "chat",
+      "msg": "/pc 3.14dor" // Can be used for commands example
+    },
+    { // You can use either slot or sbid here
+      "type": "switch",
+      "slot": 2
+    },
+    {
+      "type": "switch",
+      "sbid": "ENDER_PEARL"
+    },
+    { // Accepts either bind or key
+      "type": "press",
+      "bind": "something.minecraft.act",
+      "del": 10
+    },
+    {
+      "type": "press",
+      "key": { // Key is given in a standard form same as activation parameter
+        "type": "mouse",
+        "key": 0
+      }
+    }
+  ],
+  // Optional parameter, that is gonna be executed as long as key activation key is Down, after
+  "while": {
+    "hold": {
+      "type": "mouse",
+      "key": 0
+    },
+    // OR
+    "hold": "keybinding.attack"
+  }
+}

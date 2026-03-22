@@ -2,6 +2,7 @@ package me.qigan.zacoxlo.util;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -83,5 +84,9 @@ public class UnsortedUtils {
         }));
 
         return lines;
+    }
+
+    public static InputConstants.Key getKeyByInt(InputConstants.Type type, int key) {
+        return type.getOrCreate(key);
     }
 }

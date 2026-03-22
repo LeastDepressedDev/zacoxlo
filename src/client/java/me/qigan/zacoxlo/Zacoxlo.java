@@ -1,8 +1,6 @@
 package me.qigan.zacoxlo;
 
-import me.qigan.zacoxlo.backbone.ClickSimTick;
-import me.qigan.zacoxlo.backbone.ClientTickTimes;
-import me.qigan.zacoxlo.backbone.Hud;
+import me.qigan.zacoxlo.backbone.*;
 import me.qigan.zacoxlo.cfg.ConfigManager;
 import me.qigan.zacoxlo.cfg.MuConfig;
 import me.qigan.zacoxlo.util.Sync;
@@ -11,7 +9,6 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.File;
@@ -25,13 +22,18 @@ public class Zacoxlo implements ClientModInitializer {
 	public void onInitializeClient() {
         File file = new File(FabricLoader.getInstance().getConfigDir() + "/zacoxlo/configs");
         if (!file.exists()) file.mkdirs();
+        file = new File(FabricLoader.getInstance().getConfigDir() + "/zacoxlo/smacro");
+        if (!file.exists()) file.mkdirs();
+
         RSect.register();
+        AppliedKey.init();
 
         Holder.init();
 
         Zacoxlo.MAIN_CFG = new MuConfig();
         Zacoxlo.CFG_MANAGER = new ConfigManager("zacoxlo/configs");
 
+        ClientTickEvents.END_CLIENT_TICK.register(SmartTickRoutines::tick);
         ClientTickEvents.END_CLIENT_TICK.register(ClickSimTick::tick);
         ClientTickEvents.END_CLIENT_TICK.register(Sync::clientTick);
         ClientTickEvents.END_CLIENT_TICK.register(ClientTickTimes::clientStaticTick);
