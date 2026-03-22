@@ -3,12 +3,18 @@ package me.qigan.zacoxlo.util;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -20,6 +26,7 @@ import org.joml.Vector3f;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class UnsortedUtils {
     public static AABB getRadiusAABB(double r) {
@@ -88,5 +95,24 @@ public class UnsortedUtils {
 
     public static InputConstants.Key getKeyByInt(InputConstants.Type type, int key) {
         return type.getOrCreate(key);
+    }
+
+    public static CompoundTag getSBData(ItemStack stack) {
+        if (stack == null || !stack.has(DataComponents.CUSTOM_DATA)) return null;
+        return Objects.requireNonNull(stack.get(DataComponents.CUSTOM_DATA)).copyTag();
+    }
+
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
+    public static String getSbId(ItemStack stack) {
+        CompoundTag tag = getSBData(stack);
+        if (tag == null) return null;
+        return tag.contains("id") ? tag.getString("id").get() : null;
+    }
+
+    public static KeyMapping keyVanillaBind(String bind) {
+        for (KeyMapping mapping : Minecraft.getInstance().options.keyMappings) {
+            if (mapping.getName().equalsIgnoreCase(bind)) return mapping;
+        }
+        return null;
     }
 }

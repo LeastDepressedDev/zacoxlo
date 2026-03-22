@@ -2,7 +2,9 @@ package me.qigan.zacoxlo.fr.macro;
 
 import me.qigan.zacoxlo.util.UnsortedUtils;
 
-public class MLogTask implements Macro.MacroTask{
+import java.util.function.Function;
+
+public class MLogTask implements Macro.MacroTask {
 
     public final String message;
 
@@ -11,7 +13,15 @@ public class MLogTask implements Macro.MacroTask{
     }
 
     @Override
-    public Runnable make() {
-        return () -> UnsortedUtils.sendQuickLog(this.message);
+    public Function<Void, Boolean> make() {
+        return (v) -> {
+            try {
+                UnsortedUtils.sendQuickLog(this.message);
+                return true;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return false;
+            }
+        };
     }
 }

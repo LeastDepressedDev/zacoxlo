@@ -111,7 +111,7 @@ public class AutoLevers extends Module {
             }
         });
 
-        WorldRenderEvents.END_MAIN.register((ctx) -> {
+        WorldRenderEvents.END_MAIN.register(RSect.PHASE_RENDER, (ctx) -> {
             if (!isEnabled() || Minecraft.getInstance().level == null || !Sync.inDungeon) return;
             Drawer drawer = new Drawer(RSect.rtypesf.DEF_LINE).withContext(ctx).begin();
             drawer.globalize().capture();

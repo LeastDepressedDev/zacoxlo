@@ -27,7 +27,7 @@ public class StarredMobs extends Module {
 
     @Override
     public void onRegister() {
-        WorldRenderEvents.END_MAIN.register((ctx) -> {
+        WorldRenderEvents.END_MAIN.register(RSect.PHASE_RENDER, (ctx) -> {
             if (!isEnabled()) return;
             if (Minecraft.getInstance().level == null || !Sync.inDungeon) return;
             Drawer drawer = new Drawer(RSect.rtypesf.ESP_LINE).withContext(ctx).begin();

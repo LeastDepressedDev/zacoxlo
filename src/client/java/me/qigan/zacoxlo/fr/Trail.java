@@ -48,7 +48,7 @@ public class Trail extends Module {
 
             c_angle+=(float) Zacoxlo.MAIN_CFG.getDoubleVal("dtrail_shift");
         });
-        WorldRenderEvents.END_MAIN.register((ctx) -> {
+        WorldRenderEvents.END_MAIN.register(RSect.PHASE_RENDER, (ctx) -> {
             if (!isEnabled() || pos_l.isEmpty() || Minecraft.getInstance().level == null) return;
             Drawer drawer = new Drawer(RSect.rtypesf.THICK_DEF_LINE).withContext(ctx).begin();
             drawer.globalize().capture(); //TODO: Resolve line width sub finishing case

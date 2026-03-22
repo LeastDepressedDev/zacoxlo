@@ -13,6 +13,9 @@ import java.util.OptionalDouble;
 import java.util.Set;
 
 public class RSect {
+    public static final ResourceLocation PHASE_RENDER = ResourceLocation.fromNamespaceAndPath("zacoxlo", "render_begin");
+    public static final ResourceLocation PHASE_ENDING = ResourceLocation.fromNamespaceAndPath("zacoxlo", "render_end");
+
     public static class names {
 
         public static final Set<String> collection = new HashSet<>();

@@ -24,6 +24,7 @@ public class Zacoxlo implements ClientModInitializer {
         if (!file.exists()) file.mkdirs();
         file = new File(FabricLoader.getInstance().getConfigDir() + "/zacoxlo/smacro");
         if (!file.exists()) file.mkdirs();
+        WorldRenderEvents.END_MAIN.addPhaseOrdering(RSect.PHASE_RENDER, RSect.PHASE_ENDING);
 
         RSect.register();
         AppliedKey.init();
@@ -46,6 +47,6 @@ public class Zacoxlo implements ClientModInitializer {
                 }));
 
         Hud.init();
-        WorldRenderEvents.END_MAIN.register((ctx) -> {RSect.endBatches();});
+        WorldRenderEvents.END_MAIN.register(RSect.PHASE_ENDING, (ctx) -> {RSect.endBatches();});
 	}
 }

@@ -44,7 +44,7 @@ public class ClickSimTick {
         dataKey.put(key, tick);
     }
 
-    public static void updataBindableClick(InputConstants.Key key, int tick) {
+    public static void updateClick(InputConstants.Key key, int tick) {
         KeyMapping.set(key, true);
         if (!dataKey.containsKey(key)) KeyMapping.click(key);
         dataKey.put(key, tick);
@@ -61,7 +61,7 @@ public class ClickSimTick {
         dataBind.put(keybind, tick);
     }
 
-    public static void updataBindableClick(KeyMapping keybind, int tick) {
+    public static void updateClick(KeyMapping keybind, int tick) {
         keybind.setDown(true);
         if (!dataBind.containsKey(keybind)) KeyMapping.click(KeyBindingHelper.getBoundKeyOf(keybind));
         dataBind.put(keybind, tick);

@@ -5,6 +5,7 @@
     "type": "key", // accept `key` or `mouse`
     "key": 73 // Integer id of key: https://www.glfw.org/docs/3.3/group__keys.html
   },
+  "killzone": 500, // Prevents other macros from executing after this one, helps with multiple key macros management
   "require": [
     {
       "slot": 0, // Optonal
@@ -33,7 +34,8 @@
     },
     { // You can use either slot or sbid here
       "type": "switch",
-      "slot": 2
+      "slot": 2,
+      "legit": true
     },
     {
       "type": "switch",
@@ -42,6 +44,7 @@
     { // Accepts either bind or key
       "type": "press",
       "bind": "something.minecraft.act",
+      "hold": 10,
       "del": 10
     },
     {
@@ -50,6 +53,11 @@
         "type": "mouse",
         "key": 0
       }
+    },
+    {
+      "type": "var",
+      "name": "cur_slot",
+      "cap": "slot"
     }
   ],
   // Optional parameter, that is gonna be executed as long as key activation key is Down, after
