@@ -2,6 +2,7 @@ package me.qigan.zacoxlo;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import me.qigan.zacoxlo.backbone.AnoncHud;
 import me.qigan.zacoxlo.backbone.ClientTickTimes;
 import me.qigan.zacoxlo.cfg.Module;
 import me.qigan.zacoxlo.fr.macro.MacroController;
@@ -64,7 +65,7 @@ public class Commands {
                             break;
                             case "test":
                             {
-//                                ClientTickTimes.schedule(() -> Minecraft.getInstance().setScreenAndShow(new MainGui()), 2);
+                                AnoncHud.anonc("Completed", 20, 0xFF00DD00);
                             }
                             break;
                             case "sbid": {

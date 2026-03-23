@@ -48,6 +48,7 @@ public class MacroController extends Module {
         }
 
         FirstRoutine.addRoutine(() -> {
+            if (!isEnabled()) return;
             AtomicBoolean flag = new AtomicBoolean(false);
             macros.forEach(ele -> {
                 if (System.currentTimeMillis() < TIME_R) return;

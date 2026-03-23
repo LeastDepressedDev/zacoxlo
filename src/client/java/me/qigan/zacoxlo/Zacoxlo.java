@@ -39,6 +39,9 @@ public class Zacoxlo implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(Sync::clientTick);
         ClientTickEvents.END_CLIENT_TICK.register(ClientTickTimes::clientStaticTick);
 
+        Hud.newLegacyRoutine(AnoncHud.render_rt);
+        ClientTickEvents.END_CLIENT_TICK.register(AnoncHud::tick);
+
         ClientCommandRegistrationCallback.EVENT.register((
                 (commandDispatcher,
                  commandBuildContext) -> {
