@@ -2,6 +2,8 @@ package me.qigan.zacoxlo.cfg;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.internal.bind.JsonTreeWriter;
+import com.google.gson.stream.JsonWriter;
 import me.qigan.zacoxlo.Holder;
 import me.qigan.zacoxlo.crp.*;
 import me.qigan.zacoxlo.util.UnsortedUtils;
@@ -23,6 +25,10 @@ public class MuConfig {
         reload();
     }
 
+    private static String makeJsonStrReadable(String jsonstr) {
+        return jsonstr.replaceAll("\\{", "{\n").replaceAll("}", "\n}").replaceAll(",", ",\n");
+    }
+
     public void reload() {
         sets.clear();
         Module.rtCfg.clear();
@@ -34,15 +40,17 @@ public class MuConfig {
             AutoDisable annot = mdl.getClass().getAnnotation(AutoDisable.class);
             if (annot != null) this.writer.set(mdl.id(), "false");
 
-            File file = new File("%s/%s.json".formatted(this.MAIN_PTH, mdl.id()));
             JsonObject para = mdl.sets();
             if (para != null) {
+                File file = new File("%s/%s.json".formatted(this.MAIN_PTH, mdl.id()));
                 JsonObject mdlObj;
                 if (!file.exists()) {
                     try {
                         file.createNewFile();
                         FileWriter fileWriter = new FileWriter(file);
-                        fileWriter.write(para.toString());
+                        fileWriter.write(makeJsonStrReadable(para.toString()));
+                        fileWriter.flush();
+                        fileWriter.close();
                         mdlObj = para;
                     } catch (IOException e) {
                         throw new RuntimeException(e);
@@ -52,7 +60,9 @@ public class MuConfig {
                         JsonObject object = JsonParser.parseReader(new FileReader(file)).getAsJsonObject();
                         UnsortedUtils.syncWithPrototype(para, object);
                         FileWriter fileWriter = new FileWriter(file);
-                        fileWriter.write(para.toString());
+                        fileWriter.write(makeJsonStrReadable(object.toString()));
+                        fileWriter.flush();
+                        fileWriter.close();
                         mdlObj = object;
                     } catch (IOException e) {
                         throw new RuntimeException(e);

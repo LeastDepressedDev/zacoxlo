@@ -22,6 +22,7 @@ public class Holder {
         register(new SSModulo());
         register(new MacroController());
         register(new CompleteNotifier());
+        register(new CuteCreatures());
 
         register(new Experimental());
     }

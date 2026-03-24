@@ -76,6 +76,12 @@ public class Commands {
                                 }
                             }
                             break;
+                            case "rl":
+                            case "reload":
+                            {
+                                Zacoxlo.MAIN_CFG.reload();
+                            }
+                            break;
                             case "macro":
                             {
                                 if (args.length > 1) {
