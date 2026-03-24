@@ -39,6 +39,8 @@ public class Zacoxlo implements ClientModInitializer {
         Hud.newLegacyRoutine(AnoncHud.render_rt);
         ClientTickEvents.END_CLIENT_TICK.register(AnoncHud::tick);
 
+        RealRotationController.init();
+
         ClientCommandRegistrationCallback.EVENT.register((
                 (commandDispatcher,
                  commandBuildContext) -> {
