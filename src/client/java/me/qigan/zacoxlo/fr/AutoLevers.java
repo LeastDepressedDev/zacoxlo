@@ -118,6 +118,7 @@ public class AutoLevers extends Module {
             CONSTS.forEach((bp -> {
                 RenderHelper.autoBox3D(drawer, bp, tracks.contains(bp) ? 0xFF2200 : 0x00FF00, null);
             }));
+            drawer.end();
         });
     }
 
