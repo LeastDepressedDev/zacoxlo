@@ -1,11 +1,10 @@
 package me.qigan.zacoxlo.fr;
 
+import com.google.gson.JsonObject;
 import me.qigan.zacoxlo.Zacoxlo;
 import me.qigan.zacoxlo.backbone.ClickSimTick;
 import me.qigan.zacoxlo.backbone.FirstRoutine;
 import me.qigan.zacoxlo.cfg.Module;
-import me.qigan.zacoxlo.crp.SetsData;
-import me.qigan.zacoxlo.crp.ValType;
 import me.qigan.zacoxlo.util.Sync;
 import me.qigan.zacoxlo.util.UnsortedUtils;
 import me.qigan.zacoxlo.util.render.Drawer;
@@ -102,12 +101,12 @@ public class AutoLevers extends Module {
                     Minecraft.getInstance().player.position().z
             );
             if (bp == null || pos.distanceToSqr(Minecraft.getInstance().hitResult.getLocation()) >
-                    Math.pow(Zacoxlo.MAIN_CFG.getDoubleVal("f7levers_tdist"), 2)) return;
+                    Math.pow(this.cfg().get("Active distance").getAsDouble(), 2)) return;
             if (tracks.contains(bp) && !Minecraft.getInstance().player.isCrouching()) {
 
-                ClickSimTick.click(Minecraft.getInstance().options.keyUse, Zacoxlo.MAIN_CFG.getIntVal("f7levers_hold"));
+                ClickSimTick.click(Minecraft.getInstance().options.keyUse, this.cfg().get("Hold ticks").getAsInt());
 
-                del = Zacoxlo.MAIN_CFG.getIntVal("f7levers_t");
+                del = this.cfg().get("Tick delay").getAsInt();
             }
         });
 
@@ -123,11 +122,11 @@ public class AutoLevers extends Module {
     }
 
     @Override
-    public List<SetsData<?>> sets() {
-        return Arrays.asList(
-                new SetsData<>("f7levers_t", "Tick delay", ValType.NUMBER, "5"),
-                new SetsData<>("f7levers_hold", "Hold ticks", ValType.NUMBER, "3"),
-                new SetsData<>("f7levers_tdist", "Active distance", ValType.DOUBLE_NUMBER, "4.2")
-        );
+    public JsonObject sets() {
+        JsonObject object = new JsonObject();
+        object.addProperty("Tick delay", 5);
+        object.addProperty("Hold ticks", 3);
+        object.addProperty("Active distance", 4.2);
+        return object;
     }
 }

@@ -1,7 +1,6 @@
 package me.qigan.zacoxlo;
 
 import me.qigan.zacoxlo.backbone.*;
-import me.qigan.zacoxlo.cfg.ConfigManager;
 import me.qigan.zacoxlo.cfg.MuConfig;
 import me.qigan.zacoxlo.util.Sync;
 import me.qigan.zacoxlo.util.render.RSect;
@@ -16,7 +15,6 @@ import java.io.File;
 public class Zacoxlo implements ClientModInitializer {
 
     public static MuConfig MAIN_CFG;
-    public static ConfigManager CFG_MANAGER;
 
 	@Override
 	public void onInitializeClient() {
@@ -32,7 +30,6 @@ public class Zacoxlo implements ClientModInitializer {
         Holder.init();
 
         Zacoxlo.MAIN_CFG = new MuConfig();
-        Zacoxlo.CFG_MANAGER = new ConfigManager("zacoxlo/configs");
 
         ClientTickEvents.END_CLIENT_TICK.register(SmartTickRoutines::tick);
         ClientTickEvents.END_CLIENT_TICK.register(ClickSimTick::tick);

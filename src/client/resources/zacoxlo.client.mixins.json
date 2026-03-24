@@ -3,6 +3,7 @@
   "package": "me.qigan.zacoxlo.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "MixinEntityRenderDispatcher",
     "MixinGameRenderer",
     "MixinMinecraft"
   ],

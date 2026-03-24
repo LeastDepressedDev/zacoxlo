@@ -2,6 +2,8 @@ package me.qigan.zacoxlo.util;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -23,10 +25,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.scores.*;
 import org.joml.Vector3f;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class UnsortedUtils {
     public static AABB getRadiusAABB(double r) {
@@ -114,5 +113,17 @@ public class UnsortedUtils {
             if (mapping.getName().equalsIgnoreCase(bind)) return mapping;
         }
         return null;
+    }
+
+    public static void syncWithPrototype(JsonObject proto, JsonObject main) {
+        for (Map.Entry<String, JsonElement> pr : proto.entrySet()) {
+            if (main.has(pr.getKey())) {
+                if (pr.getValue().isJsonObject()) {
+                    syncWithPrototype(pr.getValue().getAsJsonObject(), main.getAsJsonObject(pr.getKey()));
+                }
+            } else {
+                main.add(pr.getKey(), pr.getValue());
+            }
+        }
     }
 }
