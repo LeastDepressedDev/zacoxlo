@@ -3,6 +3,9 @@ package me.qigan.zacoxlo.util;
 import net.minecraft.client.Minecraft;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Sync {
     public static boolean inDungeon = false;
