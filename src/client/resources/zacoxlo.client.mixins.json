@@ -5,6 +5,8 @@
   "client": [
     "MixinEntityRenderDispatcher",
     "MixinGameRenderer",
+    "MixinItemInHandRenderer",
+    "MixinItemStackRenderer",
     "MixinMinecraft"
   ],
   "injectors": {

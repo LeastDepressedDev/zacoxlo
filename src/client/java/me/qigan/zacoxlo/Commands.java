@@ -5,8 +5,10 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import me.qigan.zacoxlo.backbone.AnoncHud;
 import me.qigan.zacoxlo.backbone.ClientTickTimes;
 import me.qigan.zacoxlo.cfg.Module;
+import me.qigan.zacoxlo.crp.AddressedData;
 import me.qigan.zacoxlo.fr.macro.MacroController;
 import me.qigan.zacoxlo.gui.MainGui;
+import me.qigan.zacoxlo.util.DungeonClass;
 import me.qigan.zacoxlo.util.UnsortedUtils;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
@@ -65,7 +67,8 @@ public class Commands {
                             break;
                             case "test":
                             {
-                                AnoncHud.anonc("Completed", 20, 0xFF00DD00);
+                                AddressedData<DungeonClass, Integer> cls = DungeonClass.capturePlayerClass();
+                                UnsortedUtils.sendQuickLog(cls == null ? "NO class" : cls.getNamespace().name());
                             }
                             break;
                             case "sbid": {

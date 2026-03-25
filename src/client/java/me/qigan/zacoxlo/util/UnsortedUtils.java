@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -28,6 +29,30 @@ import org.joml.Vector3f;
 import java.util.*;
 
 public class UnsortedUtils {
+
+    public static int romanToInt(String s) {
+        Map<Character, Integer> romanMap = new HashMap<>();
+        romanMap.put('I', 1);
+        romanMap.put('V', 5);
+        romanMap.put('X', 10);
+        romanMap.put('L', 50);
+        romanMap.put('C', 100);
+        romanMap.put('D', 500);
+        romanMap.put('M', 1000);
+
+        int result = 0;
+        for (int i = 0; i < s.length() - 1; i++) {
+            if (romanMap.get(s.charAt(i)) < romanMap.get(s.charAt(i + 1))) {
+                result -= romanMap.get(s.charAt(i));
+            } else {
+                result += romanMap.get(s.charAt(i));
+            }
+        }
+        result += romanMap.get(s.charAt(s.length() - 1));
+        return result;
+    }
+
+
     public static AABB getRadiusAABB(double r) {
         Vec3 vec3 = Minecraft.getInstance().player.position();
         return new AABB(vec3.x-r, vec3.y-r, vec3.z-r, vec3.x+r, vec3.y+r, vec3.z+r);
@@ -125,5 +150,16 @@ public class UnsortedUtils {
                 main.add(pr.getKey(), pr.getValue());
             }
         }
+    }
+
+    @SuppressWarnings("null")
+    public static List<String> getTab() {
+        List<String> strl = new ArrayList<>();
+        Collection<PlayerInfo> playerInfos= Minecraft.getInstance().player.connection.getListedOnlinePlayers();
+        playerInfos.forEach((plf) -> {
+            Component s = plf.getTabListDisplayName();
+            if (s!=null) strl.add(s.getString());
+        });
+        return strl;
     }
 }
