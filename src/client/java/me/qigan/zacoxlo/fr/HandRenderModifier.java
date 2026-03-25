@@ -20,7 +20,26 @@ public class HandRenderModifier extends Module {
     @Override
     public JsonObject sets() {
         JsonObject object = new JsonObject();
-        // TODO: Write cfg for this
+        object.addProperty("Disable down swing animation", false);
+
+        JsonObject itemScales = new JsonObject();
+        itemScales.addProperty("Scale X", 1f);
+        itemScales.addProperty("Scale Y", 1f);
+        itemScales.addProperty("Scale Z", 1f);
+        object.add("Item scale", itemScales);
+
+        JsonObject itemPos = new JsonObject();
+        itemPos.addProperty("Translate X", 0f);
+        itemPos.addProperty("Translate Y", 0f);
+        itemPos.addProperty("Translate Z", 0f);
+        object.add("Item translate", itemPos);
+
+//        JsonObject animSupress = new JsonObject();
+//        animSupress.addProperty("Multiply X", 1f);
+//        animSupress.addProperty("Multiply Y", 1f);
+//        animSupress.addProperty("Multiply Z", 1f);
+//        object.add("Animation supress", animSupress);
+
         return object;
     }
 }

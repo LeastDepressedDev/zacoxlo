@@ -23,6 +23,7 @@ public class Holder {
         register(new MacroController());
         register(new CompleteNotifier());
         register(new CuteCreatures());
+        register(new HandRenderModifier());
 
         register(new Experimental());
     }
