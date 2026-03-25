@@ -66,11 +66,6 @@ public class MixinItemInHandRenderer {
                 scale.get("Scale Y").getAsFloat(),
                 scale.get("Scale Z").getAsFloat()
         );
-        poseStack.translate(
-                translate.get("Translate X").getAsFloat(),
-                translate.get("Translate Y").getAsFloat(),
-                translate.get("Translate Z").getAsFloat()
-        );
     }
 
     @Inject(method = "renderItem", at = @At("TAIL"))
@@ -83,12 +78,6 @@ public class MixinItemInHandRenderer {
 
 
 
-
-//    @Inject(method = "swingArm", at = @At("HEAD"), cancellable = true)
-//    public void swingReplace(float f, float g, PoseStack poseStack, int i, HumanoidArm humanoidArm, CallbackInfo ci) {
-//        ci.cancel();
-//    }
-
     /**
      * @author LDD
      * @reason 1.8.9 Comeback is requested
@@ -97,20 +86,29 @@ public class MixinItemInHandRenderer {
     private void swingArm(float f, float g, PoseStack poseStack, int i, HumanoidArm humanoidArm) {
         if (Zacoxlo.MAIN_CFG.getBoolVal("hand_render")) {
             JsonObject cfg = Module.rtCfg.get("hand_render");
-            float h = -0.4F * Mth.sin(Mth.sqrt(f) * (float) Math.PI) ;
-            float j = 0.2F * Mth.sin(Mth.sqrt(f) * (float) (Math.PI * 2))  ; // TODO: Resolve later
-            float k = -0.2F * Mth.sin(f * (float) Math.PI) ;
+            JsonObject translate = cfg.getAsJsonObject("Item translate");
+            JsonObject suppress = cfg.getAsJsonObject("Animation suppress");
+            JsonObject rotation = cfg.getAsJsonObject("Item rotation");
+
+            float h = -0.4F * Mth.sin(Mth.sqrt(f) * (float) Math.PI) * suppress.get("Multiply X").getAsFloat();
+            float j = 0.2F * Mth.sin(Mth.sqrt(f) * (float) (Math.PI * 2)) * suppress.get("Multiply Y").getAsFloat();
+            float k = -0.2F * Mth.sin(f * (float) Math.PI) * suppress.get("Multiply Z").getAsFloat();
+
             poseStack.translate(i * h, j, k);
 
             int sub_i = humanoidArm == HumanoidArm.RIGHT ? 1 : -1;
-            poseStack.translate(sub_i * 0.56F, -0.52F + (cfg.get("Disable down swing animation").getAsBoolean() ? 0 : g) * -0.6F, -0.72F);
+            poseStack.translate(
+                    sub_i * 0.56F + translate.get("Translate X").getAsFloat(),
+                    -0.52F + (cfg.get("Disable down swing animation").getAsBoolean() ? 0 : g) * -0.6F + translate.get("Translate Y").getAsFloat(),
+                    -0.72F + translate.get("Translate Z").getAsFloat()
+            );
 
-            float g_r = 1 * Mth.sin(f * f * (float) Math.PI);
+            float g_r = Mth.sin(f * f * (float) Math.PI);
             poseStack.mulPose(Axis.YP.rotationDegrees(sub_i * (45.0F + g_r * -20.0F)));
-            float h_r = 1 * Mth.sin(Mth.sqrt(f) * (float) Math.PI);
-            poseStack.mulPose(Axis.ZP.rotationDegrees(sub_i * h_r * -20.0F));
-            poseStack.mulPose(Axis.XP.rotationDegrees(h_r * -80.0F));
-            poseStack.mulPose(Axis.YP.rotationDegrees(sub_i * -45.0F));
+            float h_r = Mth.sin(Mth.sqrt(f) * (float) Math.PI);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(sub_i * h_r * -20.0F + rotation.get("Rotation Z").getAsFloat()));
+            poseStack.mulPose(Axis.XP.rotationDegrees(h_r * -80.0F + rotation.get("Rotation X").getAsFloat()));
+            poseStack.mulPose(Axis.YP.rotationDegrees(sub_i * -45.0F + rotation.get("Rotation Y").getAsFloat()));
         } else {
             float h = -0.4F * Mth.sin(Mth.sqrt(f) * (float) Math.PI);
             float j = 0.2F * Mth.sin(Mth.sqrt(f) * (float) (Math.PI * 2));

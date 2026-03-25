@@ -21,6 +21,7 @@ public class HandRenderModifier extends Module {
     public JsonObject sets() {
         JsonObject object = new JsonObject();
         object.addProperty("Disable down swing animation", false);
+        object.addProperty("Swing animation speed", 1f);
 
         JsonObject itemScales = new JsonObject();
         itemScales.addProperty("Scale X", 1f);
@@ -34,11 +35,17 @@ public class HandRenderModifier extends Module {
         itemPos.addProperty("Translate Z", 0f);
         object.add("Item translate", itemPos);
 
-//        JsonObject animSupress = new JsonObject();
-//        animSupress.addProperty("Multiply X", 1f);
-//        animSupress.addProperty("Multiply Y", 1f);
-//        animSupress.addProperty("Multiply Z", 1f);
-//        object.add("Animation supress", animSupress);
+        JsonObject animSuppress = new JsonObject();
+        animSuppress.addProperty("Multiply X", 1f);
+        animSuppress.addProperty("Multiply Y", 1f);
+        animSuppress.addProperty("Multiply Z", 1f);
+        object.add("Animation suppress", animSuppress);
+
+        JsonObject rotation = new JsonObject();
+        rotation.addProperty("Rotation X", 0f);
+        rotation.addProperty("Rotation Y", 0f);
+        rotation.addProperty("Rotation Z", 0f);
+        object.add("Item rotation", rotation);
 
         return object;
     }

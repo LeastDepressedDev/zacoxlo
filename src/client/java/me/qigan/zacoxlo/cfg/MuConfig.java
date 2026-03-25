@@ -30,8 +30,7 @@ public class MuConfig {
     }
 
     public void reload() {
-        sets.clear();
-        Module.rtCfg.clear();
+        Map<String, JsonObject> kvo = new HashMap<>();
         for (Module mdl: Holder.MRL) {
             if (!writer.contains(mdl.id()) /*|| Debug.DISABLE_STATE.contains(mdl.id())*/) {
                 EnabledByDefault enb = mdl.getClass().getAnnotation(EnabledByDefault.class);
@@ -68,13 +67,16 @@ public class MuConfig {
                         throw new RuntimeException(e);
                     }
                 }
-                Module.rtCfg.put(mdl.id(), mdlObj);
+                kvo.put(mdl.id(), mdlObj);
             }
         }
 
+        Map<String, String> kvm = new HashMap<>();
         for(AddressedData<String, String> w: writer.get()) {
-            sets.put(w.getNamespace(), w.getObject());
+            kvm.put(w.getNamespace(), w.getObject());
         }
+        sets = kvm;
+        Module.rtCfg = kvo;
     }
 
 	/*public List<AddressedData<String, Boolean>> getAll() {
