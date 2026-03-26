@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import me.qigan.zacoxlo.backbone.AnoncHud;
 import me.qigan.zacoxlo.backbone.ClientTickTimes;
+import me.qigan.zacoxlo.backbone.RealRotationController;
 import me.qigan.zacoxlo.cfg.Module;
 import me.qigan.zacoxlo.crp.AddressedData;
 import me.qigan.zacoxlo.fr.macro.MacroController;
@@ -20,6 +21,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
+import org.joml.Vector2f;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -67,8 +69,9 @@ public class Commands {
                             break;
                             case "test":
                             {
-                                AddressedData<DungeonClass, Integer> cls = DungeonClass.capturePlayerClass();
-                                UnsortedUtils.sendQuickLog(cls == null ? "NO class" : cls.getNamespace().name());
+//                                RealRotationController.addRotation(new Vector2f(30, 0));
+                                RealRotationController.rotate(new RealRotationController.Target(0.004f, 0.43f, 1f)
+                                        .minima(0.4f).dead(0.4f).point(30, 10), 100);
                             }
                             break;
                             case "sbid": {
