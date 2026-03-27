@@ -59,7 +59,6 @@ public class MixinItemInHandRenderer {
         if (!Zacoxlo.MAIN_CFG.getBoolVal("hand_render")) return;
         poseStack.pushPose();
         JsonObject scale = Module.rtCfg.get("hand_render").getAsJsonObject("Item scale");
-        JsonObject translate = Module.rtCfg.get("hand_render").getAsJsonObject("Item translate");
         // Item size
         poseStack.scale(
                 scale.get("Scale X").getAsFloat(),

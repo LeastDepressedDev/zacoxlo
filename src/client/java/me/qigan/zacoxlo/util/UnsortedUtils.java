@@ -30,6 +30,16 @@ import java.util.*;
 
 public class UnsortedUtils {
 
+    public static String decolorize(String in) {
+        char[] carr = in.toCharArray();
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < carr.length; i++) {
+            if (carr[i] == '§') i++;
+            else builder.append(carr[i]);
+        }
+        return builder.toString();
+    }
+
     public static int romanToInt(String s) {
         Map<Character, Integer> romanMap = new HashMap<>();
         romanMap.put('I', 1);

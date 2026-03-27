@@ -21,7 +21,7 @@ public class Holder {
         register(new Trail());
         register(new SSModulo());
         register(new MacroController());
-        register(new CompleteNotifier());
+        register(new Rita());
         register(new CuteCreatures());
         register(new HandRenderModifier());
 

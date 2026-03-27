@@ -7,7 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.phys.AABB;
 
-public class CompleteNotifier extends Module {
+public class Rita extends Module {
 
     //62 125 36
     //64 130 34
@@ -15,12 +15,12 @@ public class CompleteNotifier extends Module {
 
     @Override
     public String id() {
-        return "c_anonc";
+        return "rita";
     }
 
     @Override
     public String description() {
-        return "Spams you that you have done your shit";
+        return "Spams you sound and visuals on certain events. Mig-29 gaming.";
     }
 
     @Override
