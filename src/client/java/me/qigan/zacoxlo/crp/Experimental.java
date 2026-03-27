@@ -6,6 +6,7 @@ import me.qigan.zacoxlo.util.UnsortedUtils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.Mth;
 
 public class Experimental extends Module {
     @Override
@@ -20,10 +21,9 @@ public class Experimental extends Module {
 
     @Override
     public void onRegister() {
-        KeyMapping mp = new KeyMapping("kb.ss", InputConstants.KEY_R, KeyMapping.Category.MISC);
         ClientTickEvents.END_CLIENT_TICK.register((mc) -> {
-            if (!isEnabled()) return;
-            if (mp.isDown()) UnsortedUtils.sendQuickLog("ADAD");
+            if (!isEnabled() || Minecraft.getInstance().player == null) return;
+            UnsortedUtils.sendQuickLog(Mth.wrapDegrees(mc.player.getYRot())+" "+mc.player.getYRot());
         });
     }
 }
