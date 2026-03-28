@@ -24,6 +24,7 @@ public class Holder {
         register(new Rita());
         register(new CuteCreatures());
         register(new HandRenderModifier());
+        register(new AutoClicker());
 
         register(new Experimental());
     }

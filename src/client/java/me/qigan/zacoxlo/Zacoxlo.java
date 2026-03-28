@@ -33,6 +33,7 @@ public class Zacoxlo implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(SmartTickRoutines::tick);
         ClientTickEvents.END_CLIENT_TICK.register(ClickSimTick::tick);
+        FirstRoutine.addRoutine(ClickSimTime::tick);
         ClientTickEvents.END_CLIENT_TICK.register(Sync::clientTick);
         ClientTickEvents.END_CLIENT_TICK.register(ClientTickTimes::clientStaticTick);
 

@@ -19,5 +19,6 @@ public abstract class Module {
     public final JsonObject cfg() {return rtCfg.get(this.id());}
     public abstract void onRegister();
     public boolean isEnabled() {return Zacoxlo.MAIN_CFG.getBoolVal(this.id());}
+    public void onReload() {} // Called after config reloaded
     //public WKeybind moduleBind() {return Index.KEY_MANAGER.get(id());}
 }

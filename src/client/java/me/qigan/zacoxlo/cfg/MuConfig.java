@@ -77,6 +77,10 @@ public class MuConfig {
         }
         sets = kvm;
         Module.rtCfg = kvo;
+
+        for (Module mdl: Holder.MRL) {
+            mdl.onReload();
+        }
     }
 
 	/*public List<AddressedData<String, Boolean>> getAll() {

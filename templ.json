@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "sbid": "TERMINATOR",
+      "lcm": {
+        "hold": 50,
+        "del": 200
+      },
+      "rcm": {
+        "hold": 50,
+        "del": {
+          "min": 200,
+          "max": 500
+        }
+      }
+    }
+  ]
+}
