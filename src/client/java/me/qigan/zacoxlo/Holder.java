@@ -25,6 +25,7 @@ public class Holder {
         register(new CuteCreatures());
         register(new HandRenderModifier());
         register(new AutoClicker());
+        register(new DaggerSwap());
 
         register(new Experimental());
     }

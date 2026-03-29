@@ -71,10 +71,10 @@ public class Commands {
                             case "test":
                             {
 //                                RealRotationController.addRotation(new Vector2f(30, 0));
-//                                RealRotationController.rotate(new RealRotationController.Target(0.004f, 0.43f, 1f)
-//                                        .minima(0.4f).dead(0.4f).point(30, 10), 100);
-                                AnoncHud.anonc("LEAP LEAP", 40, 0xFFFF90AA, new Vector2f(0, -40),
-                                        SoundEvents.EXPERIENCE_ORB_PICKUP, new Vector2f(2f, 1f));
+                                RealRotationController.rotate(new RealRotationController.Target(0.004f, 0.43f, 1f)
+                                        .minima(0.4f).dead(0.4f).point(30, 10), 100);
+//                                AnoncHud.anonc("LEAP LEAP", 40, 0xFFFF90AA, new Vector2f(0, -40),
+//                                        SoundEvents.EXPERIENCE_ORB_PICKUP, new Vector2f(2f, 1f));
                             }
                             break;
                             case "sbid": {

@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -112,6 +113,17 @@ public class Macro {
     public final DEL_TYPE delType;
     protected final List<AddressedData<String, Integer>> requires = new ArrayList<>();
     protected final List<AddressedData<MacroTask, Integer>> sequence = new ArrayList<>();
+
+    public Macro(AppliedKey kb, int killzone, @NotNull DEL_TYPE delType) {
+        this.kb = kb;
+        this.killzone = killzone;
+        this.delType = delType;
+    }
+
+    public Macro pushSeq(MacroTask task, int del) {
+        sequence.add(new AddressedData<>(task, del));
+        return this;
+    }
 
     public Macro(JsonObject obj) throws MacroInitException {
         JsonObject activate = obj.getAsJsonObject("activate");
@@ -226,16 +238,20 @@ public class Macro {
     public boolean tryActivate() {
         if (kb.keyPress()) {
             if (this.checkRequirements()) {
-                switch (this.delType) {
-                    case TICK -> SmartTickRoutines.newRoutine(new MacroSmartTickRoutine(this));
-                    case TIME -> SmartFirstRoutines.newRoutine(new MacroSmartFirstRoutine(this));
-                    // TODO: Fix thread mode not working
-                    case THREAD -> new MacroThreadRoutine(this).start();
-                }
-                MacroController.update_kz(killzone);
+                forceActivate();
                 return true;
             }
         }
         return false;
+    }
+
+    public void forceActivate() {
+        switch (this.delType) {
+            case TICK -> SmartTickRoutines.newRoutine(new MacroSmartTickRoutine(this));
+            case TIME -> SmartFirstRoutines.newRoutine(new MacroSmartFirstRoutine(this));
+            // TODO: Fix thread mode not working
+            case THREAD -> new MacroThreadRoutine(this).start();
+        }
+        MacroController.update_kz(killzone);
     }
 }
