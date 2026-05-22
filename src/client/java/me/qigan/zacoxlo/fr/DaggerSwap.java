@@ -28,7 +28,7 @@ public class DaggerSwap extends Module {
 
     @SuppressWarnings("null")
     private static STATE match() {
-        double dist = 5;
+        double dist = 12;
         STATE state = null;
         Minecraft mc = Minecraft.getInstance();
         for (Entity ent : mc.level.getEntitiesOfClass(ArmorStand.class, UnsortedUtils.getRadiusAABB(5))) {
@@ -41,6 +41,7 @@ public class DaggerSwap extends Module {
         }
         return state;
     }
+
 
     private static AddressedData<Integer, Item>[] getSlotsAndStates() {
         AddressedData<Integer, Item>[] data = new AddressedData[]{null, null};
