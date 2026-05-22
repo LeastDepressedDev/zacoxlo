@@ -6,6 +6,7 @@
     "MixinChatComponent",
     "MixinEntityRenderDispatcher",
     "MixinGameRenderer",
+    "MixinGui",
     "MixinItemInHandRenderer",
     "MixinItemStackRenderer",
     "MixinMinecraft"
