@@ -7,6 +7,7 @@
     "MixinEntityRenderDispatcher",
     "MixinGameRenderer",
     "MixinGui",
+    "MixinInventoryScreen",
     "MixinItemInHandRenderer",
     "MixinItemStackRenderer",
     "MixinMinecraft"

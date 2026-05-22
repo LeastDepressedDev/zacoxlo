@@ -26,7 +26,7 @@ public class Holder {
         register(new HandRenderModifier());
         register(new AutoClicker());
         register(new DaggerSwap());
-        register(new HudModify());
+        register(new GuiModify());
 
         register(new Experimental());
     }

@@ -2,23 +2,23 @@ package me.qigan.zacoxlo.fr;
 
 import com.google.gson.JsonObject;
 import me.qigan.zacoxlo.cfg.Module;
-import net.minecraft.client.gui.screens.ChatScreen;
 
-public class HudModify extends Module {
+public class GuiModify extends Module {
     @Override
     public String id() {
-        return "hud_modify";
+        return "gui_modify";
     }
 
     @Override
     public String description() {
-        return "Modifies basic MC hud.";
+        return "Modifies basic MC guis.";
     }
 
     @Override
     public JsonObject sets() {
         JsonObject obj = new JsonObject();
-        obj.addProperty("Hide effects", true);
+        obj.addProperty("Hide hud effects", true);
+        obj.addProperty("Hide inventory effects", true);
         return obj;
     }
 
