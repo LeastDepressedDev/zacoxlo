@@ -2,6 +2,7 @@ package me.qigan.zacoxlo;
 
 import me.qigan.zacoxlo.backbone.*;
 import me.qigan.zacoxlo.cfg.MuConfig;
+import me.qigan.zacoxlo.pre.PreLoad;
 import me.qigan.zacoxlo.util.Sync;
 import me.qigan.zacoxlo.util.render.RSect;
 import net.fabricmc.api.ClientModInitializer;
@@ -18,6 +19,9 @@ public class Zacoxlo implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+        PreLoad.load();
+
+        // Post loadig
         File file = new File(FabricLoader.getInstance().getConfigDir() + "/zacoxlo/configs");
         if (!file.exists()) file.mkdirs();
         file = new File(FabricLoader.getInstance().getConfigDir() + "/zacoxlo/smacro");

@@ -39,7 +39,7 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
-	
+    implementation 'me.friwi:jcefmaven:146.0.10'
 }
 
 processResources {

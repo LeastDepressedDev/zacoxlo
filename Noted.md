@@ -6,3 +6,4 @@ Terminals: §6Prezz_ §aactivated a terminal! (§c7§a/7) §8(§712.736s §8| §
 Device: §6BrainrotMonarch §acompleted a device! (§c5§a/7) §8(§78.572s §8| §78.572s§8)
 
 TODOF: decolorize
+InventoryScreen.java check init(), you will get the idea
